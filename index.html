@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="Answer 8 fun questions. We write a 4-page memoir in your pet's voice. Mailed to your door for $19.99." />
+  <title>PetMemoir — Your Pet's Story, In Their Own Words</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== LANDING SECTION ===== -->
+  <section id="landing" class="section active">
+    <div class="landing-inner">
+      <div class="badge">✦ New from KeepAISharp</div>
+      <h1 class="hero-headline">Your pet has a story.<br>Let's help them tell it.</h1>
+      <p class="hero-sub">Answer 8 fun questions. We write a 4-page memoir in their voice. Mailed to your door.</p>
+      <ul class="hook-list">
+        <li><span class="check">✓</span> Written by AI in your pet's actual personality</li>
+        <li><span class="check">✓</span> Premium booklet, mailed in 3–5 business days</li>
+        <li><span class="check">✓</span> $19.99 — less than a fancy dog treat</li>
+      </ul>
+      <button class="btn-primary btn-large" onclick="startQuiz()">Start Your Pet's Memoir →</button>
+      <div class="social-proof">
+        <div class="quote">"Luna's memoir had me sobbing and laughing on the same page."</div>
+        <div class="attribution">— Riley T., Hermosa Beach</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUIZ SECTION ===== -->
+  <section id="quiz" class="section">
+
+    <!-- Progress bar -->
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">Step 1 of 8</div>
+
+    <!-- Step 1: Pet Name -->
+    <div class="step" id="step-1">
+      <div class="step-inner">
+        <h2 class="step-question">What's your pet's name?</h2>
+        <input type="text" id="petName" class="input-text" placeholder="Luna, Biscuit, Sir Fluffington…" maxlength="40" autocomplete="off" />
+        <div class="error-msg" id="error-1"></div>
+        <button class="btn-primary btn-next" onclick="nextStep(1)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Type + Size -->
+    <div class="step hidden" id="step-2">
+      <div class="step-inner">
+        <h2 class="step-question">What kind of creature is <span class="pet-name-inline"></span>?</h2>
+        <div class="chip-group" id="petType">
+          <button class="chip" data-value="Dog">🐶 Dog</button>
+          <button class="chip" data-value="Cat">🐱 Cat</button>
+          <button class="chip" data-value="Other">🐾 Other</button>
+        </div>
+        <div id="otherTypeWrap" class="hidden" style="margin-top:12px">
+          <input type="text" id="petTypeOther" class="input-text" placeholder="Rabbit, bird, hamster…" maxlength="30" />
+        </div>
+
+        <h2 class="step-question" style="margin-top:32px">How would you describe <span class="pet-name-inline"></span>'s size?</h2>
+        <div class="chip-group" id="petSize">
+          <button class="chip" data-value="Tiny terror">Tiny terror</button>
+          <button class="chip" data-value="Medium-ish">Medium-ish</button>
+          <button class="chip" data-value="Big baby">Big baby</button>
+          <button class="chip" data-value="Absolute unit">Absolute unit</button>
+        </div>
+        <div class="error-msg" id="error-2"></div>
+        <button class="btn-primary btn-next" onclick="nextStep(2)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Personality + Relationship -->
+    <div class="step hidden" id="step-3">
+      <div class="step-inner">
+        <h2 class="step-question"><span class="pet-name-inline"></span>'s personality in one word?</h2>
+        <div class="chip-group" id="personality">
+          <button class="chip" data-value="Dramatic">Dramatic</button>
+          <button class="chip" data-value="Chaotic">Chaotic</button>
+          <button class="chip" data-value="Chill">Chill</button>
+          <button class="chip" data-value="Needy">Needy</button>
+          <button class="chip" data-value="Dignified">Dignified</button>
+          <button class="chip" data-value="Unhinged">Unhinged</button>
+        </div>
+
+        <h2 class="step-question" style="margin-top:32px">What's <span class="pet-name-inline"></span>'s relationship with you?</h2>
+        <div class="chip-group chip-group--stacked" id="relationship">
+          <button class="chip" data-value="I'm their whole world">I'm their whole world</button>
+          <button class="chip" data-value="They tolerate me">They tolerate me</button>
+          <button class="chip" data-value="We're equals">We're equals</button>
+          <button class="chip" data-value="I work for them">I work for them</button>
+          <button class="chip" data-value="It's complicated">It's complicated</button>
+        </div>
+        <div class="error-msg" id="error-3"></div>
+        <button class="btn-primary btn-next" onclick="nextStep(3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Habits + Laugh + Opinion -->
+    <div class="step hidden" id="step-4">
+      <div class="step-inner">
+        <h2 class="step-question"><span class="pet-name-inline"></span>'s most ridiculous habit is…</h2>
+        <textarea id="habit" class="input-textarea" rows="2" placeholder="stealing socks from the laundry and hiding them under the couch like buried treasure" maxlength="200"></textarea>
+
+        <h2 class="step-question" style="margin-top:28px">The thing <span class="pet-name-inline"></span> does that always makes you laugh:</h2>
+        <textarea id="laughThing" class="input-textarea" rows="2" placeholder="stares at me from two inches away until I wake up, then acts like nothing happened" maxlength="200"></textarea>
+
+        <h2 class="step-question" style="margin-top:28px"><span class="pet-name-inline"></span>'s opinion about ___ is very strong:</h2>
+        <textarea id="strongOpinion" class="input-textarea" rows="2" placeholder="the mailman, who is clearly a threat to national security" maxlength="200"></textarea>
+
+        <div class="error-msg" id="error-4"></div>
+        <button class="btn-primary btn-next" onclick="nextStep(4)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 5: One Message -->
+    <div class="step hidden" id="step-5">
+      <div class="step-inner">
+        <h2 class="step-question">If <span class="pet-name-inline"></span> could say one thing to you, what do you think it would be?</h2>
+        <p class="step-hint">Don't overthink this. Just write whatever comes to mind.</p>
+        <textarea id="oneMessage" class="input-textarea" rows="3" placeholder="You are my favorite human, even though I pretend otherwise" maxlength="300"></textarea>
+        <div class="error-msg" id="error-5"></div>
+        <button class="btn-primary btn-next" onclick="nextStep(5)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 6: Vibe + Extra (optional) -->
+    <div class="step hidden" id="step-6">
+      <div class="step-inner">
+        <h2 class="step-question">Pick a vibe for the memoir</h2>
+        <p class="step-hint">Optional — we'll mix it up if you skip this.</p>
+        <div class="chip-group chip-group--stacked" id="vibe">
+          <button class="chip" data-value="Funny and chaotic">😂 Funny and chaotic</button>
+          <button class="chip" data-value="Warm and sentimental">❤️ Warm and sentimental</button>
+          <button class="chip" data-value="Sarcastic and sassy">😏 Sarcastic and sassy</button>
+          <button class="chip" data-value="Mix of everything">✨ Mix of everything</button>
+        </div>
+
+        <h2 class="step-question" style="margin-top:28px">Any specific stories you want included?</h2>
+        <p class="step-hint">Optional — leave blank if not.</p>
+        <textarea id="extraStory" class="input-textarea" rows="3" placeholder="The time Luna knocked my entire coffee off the counter while staring me dead in the eyes…" maxlength="400"></textarea>
+
+        <button class="btn-primary btn-next" onclick="nextStep(6)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 7: Shipping -->
+    <div class="step hidden" id="step-7">
+      <div class="step-inner">
+        <h2 class="step-question">Where should we mail <span class="pet-name-inline"></span>'s memoir?</h2>
+
+        <div class="booklet-preview">
+          <div class="booklet-mock">
+            <div class="booklet-cover">
+              <div class="booklet-title" id="bookletPetName">Your Pet's</div>
+              <div class="booklet-subtitle">Memoir</div>
+              <div class="booklet-pages">✦ ✦ ✦ ✦</div>
+            </div>
+          </div>
+          <div class="booklet-desc">
+            <strong>Premium printed booklet</strong><br>
+            4 pages · Mailed in 3–5 business days<br>
+            <span class="price-tag">$19.99 total</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Your name</label>
+          <input type="text" id="shippingName" class="input-text" placeholder="Raj Lakhani" maxlength="60" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Street address</label>
+          <input type="text" id="shippingAddress1" class="input-text" placeholder="123 Main St" maxlength="100" autocomplete="address-line1" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Apt / Suite <span class="optional-label">(optional)</span></label>
+          <input type="text" id="shippingAddress2" class="input-text" placeholder="Apt 4B" maxlength="60" autocomplete="address-line2" />
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--city">
+            <label class="form-label">City</label>
+            <input type="text" id="shippingCity" class="input-text" placeholder="Redondo Beach" maxlength="60" autocomplete="address-level2" />
+          </div>
+          <div class="form-group form-group--state">
+            <label class="form-label">State</label>
+            <input type="text" id="shippingState" class="input-text" placeholder="CA" maxlength="2" autocomplete="address-level1" />
+          </div>
+          <div class="form-group form-group--zip">
+            <label class="form-label">ZIP</label>
+            <input type="text" id="shippingZip" class="input-text" placeholder="90277" maxlength="10" autocomplete="postal-code" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email <span class="optional-label">(optional — for order updates)</span></label>
+          <input type="email" id="email" class="input-text" placeholder="you@example.com" maxlength="100" autocomplete="email" />
+        </div>
+
+        <div class="error-msg" id="error-7"></div>
+        <button class="btn-primary btn-large" id="btnPay" onclick="submitOrder()">
+          Pay $19.99 &amp; Create <span class="pet-name-inline"></span>'s Memoir →
+        </button>
+        <p class="secure-note">🔒 Secure checkout via Stripe</p>
+      </div>
+    </div>
+
+    <!-- Step 8: Processing (shown while POSTing) -->
+    <div class="step hidden" id="step-8">
+      <div class="step-inner step-inner--center">
+        <div class="spinner"></div>
+        <h2 class="step-question">One moment…</h2>
+        <p class="step-hint">Setting up <span class="pet-name-inline"></span>'s memoir</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== CONFIRMATION SECTION ===== -->
+  <section id="confirmation" class="section">
+    <div class="confirm-inner">
+      <div class="confirm-icon">🎉</div>
+      <h2 class="confirm-headline">We're writing <span class="pet-name-confirm"></span>'s memoir now!</h2>
+      <p class="confirm-body">We got your payment. Claude is spinning up <span class="pet-name-confirm"></span>'s story as we speak.</p>
+      <p class="confirm-body">Your premium booklet will be mailed within 1–2 business days. Expect it in 3–5 days total.</p>
+      <p class="confirm-share">Share your quiz experience with a friend 👇</p>
+      <button class="btn-secondary" onclick="window.location.href='index.html'">Make Another Pet's Memoir →</button>
+    </div>
+  </section>
+
+  <script src="quiz.js"></script>
+</body>
+</html>
